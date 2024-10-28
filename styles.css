@@ -25,6 +25,7 @@ body {
 }
 
 #level-title {
+  padding: 10px;
   font-size: 2rem;
   margin: 20px 0;
   color: #FEF2BF;
