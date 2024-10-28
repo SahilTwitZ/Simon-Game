@@ -18,6 +18,20 @@ $(document).keypress(function() {
   }
 });
 
+// Allow restart by clicking on the title if the game is over
+$("#level-title").click(function() {
+  if (!started) { // Only allow starting the game when it's not started
+    $("#level-title").text("Level " + level);
+    nextSequence();
+    started = true;
+  } else { // If game has started and player clicks on title, restart if game is over
+    if (gamePattern.length === 0) { // Game is over and ready to restart
+      startOver(); // Reset game variables
+      $("#level-title").text("Tap Here to Start"); // Reset the title to show it can be tapped to start
+    }
+  }
+});
+
 // Capture button clicks and check user's answer
 $(".btn").click(function() {
   var userChosenColour = $(this).attr("id");
@@ -43,7 +57,7 @@ function checkAnswer(currentLevel) {
     // Play wrong sound, show game over effect, and restart game
     playSound("wrong");
     $("body").addClass("game-over");
-    $("#level-title").text("Game Over, Press Any Key to Restart");
+    $("#level-title").text("Game Over, Tap Here to Restart");
 
     setTimeout(function() {
       $("body").removeClass("game-over");
